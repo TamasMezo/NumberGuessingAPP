@@ -1,7 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Text, View, StyleSheet, Button, Alert } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Alert,
+  ImageBackground
+} from "react-native";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
+import whiteBg from "../assets/whiteBg.jpg";
+import Colors from "../constans/colors";
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -56,17 +65,30 @@ const GameScreen = props => {
   };
 
   return (
-    <View style={styles.screen}>
-      <Text>Opponent's Guess</Text>
-      <NumberContainer>{currentGuess}</NumberContainer>
-      <Card style={styles.buttonContainer}>
-        <Button title="Lower" onPress={nextGuessHandler.bind(this, "lower")} />
-        <Button
-          title="Greater"
-          onPress={nextGuessHandler.bind(this, "greater")}
-        />
-      </Card>
-    </View>
+    <ImageBackground
+      source={whiteBg}
+      style={{
+        width: "100%",
+        height: "100%"
+      }}
+    >
+      <View style={styles.screen}>
+        <Text>Opponent's Guess</Text>
+        <NumberContainer>{currentGuess}</NumberContainer>
+        <Card style={styles.buttonContainer}>
+          <Button
+            title="Lower"
+            onPress={nextGuessHandler.bind(this, "lower")}
+            color={Colors.secondary}
+          />
+          <Button
+            title="Greater"
+            onPress={nextGuessHandler.bind(this, "greater")}
+            color={Colors.primary}
+          />
+        </Card>
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -74,7 +96,8 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 10,
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.8)"
   },
   buttonContainer: {
     flexDirection: "row",
