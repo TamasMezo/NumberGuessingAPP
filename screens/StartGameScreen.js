@@ -43,7 +43,6 @@ const StartGameScreen = props => {
     setEnteredValue("");
     Keyboard.dismiss();
   };
-  //ert(title: string, message?: string, buttons?: AlertButton[], options?: AlertOptions): void
   let confirmedOutput;
 
   if (confirmed) {
