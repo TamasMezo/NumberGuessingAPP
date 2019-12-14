@@ -3,12 +3,12 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableButton,
   Alert,
   Button,
   TextInput,
   ImageBackground,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableOpacity
 } from "react-native";
 import Colors from "../constans/colors";
 import numbersPic from "../assets/numbers.jpg";
@@ -16,6 +16,7 @@ import numbersPic from "../assets/numbers.jpg";
 const WelcomeScreen = props => {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [signUpScreenActive, setSignUpScreenActive] = useState(false);
 
   const emailAddressHandler = emailAddress => {
     setEmailAddress(emailAddress);
@@ -23,6 +24,13 @@ const WelcomeScreen = props => {
 
   const passwordHandler = password => {
     setPassword(password);
+  };
+
+  const switchToSignUp = () => {
+    setSignUpScreenActive(true);
+  };
+  const switchToSignIN = () => {
+    setSignUpScreenActive(false);
   };
 
   const validateInputFields = () => {
@@ -39,6 +47,52 @@ const WelcomeScreen = props => {
     }
   };
 
+  let signInContent = (
+    <>
+      <View>
+        <Text style={styles.signUpText}>
+          You are not registered? Then click
+          <Text style={styles.signUp} onPress={switchToSignUp}>
+            SIGN UP
+          </Text>
+          !
+        </Text>
+      </View>
+      <View style={{ marginVertical: 20 }}>
+        <Button
+          title="Sign in"
+          style={styles.button}
+          onPress={validateInputFields}
+          color={Colors.secondary}
+        />
+      </View>
+    </>
+  );
+
+  if (signUpScreenActive === true) {
+    signInContent = (
+      <>
+        <View>
+          <TextInput style={styles.input} placeholder="UserName" />
+          <Text style={styles.signUpText}>
+            You are not registered? Then click
+            <Text style={styles.signUp} onPress={switchToSignIN}>
+              SIGN IN
+            </Text>
+            !
+          </Text>
+        </View>
+        <View style={{ marginVertical: 20 }}>
+          <Button
+            title="Sign up"
+            style={styles.button}
+            onPress={validateInputFields}
+            color={Colors.secondary}
+          />
+        </View>
+      </>
+    );
+  }
   return (
     <ImageBackground
       source={numbersPic}
@@ -63,23 +117,15 @@ const WelcomeScreen = props => {
                 placeholder="Email"
                 onChangeText={emailAddressHandler}
                 value={emailAddress}
-              ></TextInput>
+              />
               <TextInput
                 style={styles.input}
                 placeholder="Password"
                 secureTextEntry={true}
                 onChangeText={passwordHandler}
-              ></TextInput>
-              <Button
-                title="Sign in"
-                style={styles.button}
-                onPress={validateInputFields}
               />
+              {signInContent}
             </View>
-            <Text style={styles.signUpText}>
-              You are not registered? Then click
-              <Text style={styles.signUp}>SIGN UP</Text>!
-            </Text>
           </View>
         </KeyboardAvoidingView>
       </View>
@@ -118,15 +164,14 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   button: {
-    width: "20%",
-    backgroundColor: "yellow"
+    marginTop: 50
   },
   signUpText: {
     color: "#fff",
     marginTop: 20
   },
   signUp: {
-    color: Colors.primary
+    color: Colors.secondary
   }
 });
 
