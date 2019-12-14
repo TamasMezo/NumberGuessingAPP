@@ -73,7 +73,9 @@ const GameScreen = props => {
       }}
     >
       <View style={styles.screen}>
-        <Text>Opponent's Guess</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.text}>Opponent's Guess</Text>
+        </View>
         <NumberContainer>{currentGuess}</NumberContainer>
         <Card style={styles.buttonContainer}>
           <Button
@@ -98,6 +100,12 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
     backgroundColor: "rgba(255,255,255,0.8)"
+  },
+  titleContainer: {
+    marginTop: 80
+  },
+  text: {
+    fontSize: 30
   },
   buttonContainer: {
     flexDirection: "row",

@@ -54,6 +54,7 @@ const StartGameScreen = props => {
         <NumberContainer>{selectedNumber}</NumberContainer>
         <Button
           title="START GAME"
+          color={Colors.primary}
           onPress={() => props.onStartGame(selectedNumber)}
         />
       </Card>
@@ -74,7 +75,7 @@ const StartGameScreen = props => {
         }}
       >
         <View style={styles.screen}>
-          <Text style={styles.title}>Magnificent </Text>
+          <Text style={styles.title}>Place your bet! </Text>
           <Card style={styles.inputContainer}>
             <Text>Select a Number</Text>
             <Input

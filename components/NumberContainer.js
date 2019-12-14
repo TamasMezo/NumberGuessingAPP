@@ -19,10 +19,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 10,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    width: 100,
+    height: 100
   },
   number: {
-    color: Colors.secondary
+    color: Colors.primary,
+    fontSize: 40
   }
 });
 
