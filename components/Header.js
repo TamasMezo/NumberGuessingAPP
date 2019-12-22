@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "#fff",
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: "open-sans-bold"
   },
   barContainer: {
     flex: 1,
