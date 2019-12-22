@@ -7,8 +7,7 @@ import {
   Button,
   TextInput,
   ImageBackground,
-  KeyboardAvoidingView,
-  TouchableOpacity
+  KeyboardAvoidingView
 } from "react-native";
 import Colors from "../constans/colors";
 import numbersPic from "../assets/numbers.jpg";
@@ -150,7 +149,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: "center",
     marginHorizontal: 20,
-    marginVertical: 60
+    marginVertical: 60,
+    fontFamily: "open-sans"
   },
   inputContainer: {
     width: "80%"
