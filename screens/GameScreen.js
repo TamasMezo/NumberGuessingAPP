@@ -11,6 +11,7 @@ import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
 import whiteBg from "../assets/whiteBg.jpg";
 import Colors from "../constans/colors";
+import Defaultstyles from "../constans/default-styles";
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -74,7 +75,7 @@ const GameScreen = props => {
     >
       <View style={styles.screen}>
         <View style={styles.titleContainer}>
-          <Text style={styles.text}>Opponent's Guess</Text>
+          <Text style={Defaultstyles.bodyText}>Opponent's Guess</Text>
         </View>
         <NumberContainer>{currentGuess}</NumberContainer>
         <Card style={styles.buttonContainer}>
@@ -103,9 +104,6 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     marginTop: 80
-  },
-  text: {
-    fontSize: 30
   },
   buttonContainer: {
     flexDirection: "row",

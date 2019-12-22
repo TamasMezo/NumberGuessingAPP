@@ -1,14 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import bar from "../assets/bar.png";
 
+import bar from "../assets/bar.png";
 import Colors from "../constans/colors";
+import TitleText from "../components/TitleText";
 
 const Header = props => {
   return (
     <View style={styles.header}>
       <View style={styles.titleContainer}>
-        <Text style={styles.headerTitle}>{props.title}</Text>
+        <TitleText>{props.title}</TitleText>
       </View>
       <View style={styles.barContainer}>
         <TouchableOpacity>
@@ -34,11 +35,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "flex-end"
   },
-  headerTitle: {
-    color: "#fff",
-    fontSize: 20,
-    fontFamily: "open-sans-bold"
-  },
+
   barContainer: {
     flex: 1,
     marginRight: 20,
