@@ -1,8 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet, Button, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  ImageBackground,
+  Image
+} from "react-native";
 import Colors from "../constans/colors";
 import whiteBg from "../assets/whiteBg.jpg";
-import Card from "../components/Card";
+import Header from "../components/Header";
+import BodyText from "../components/BodyText";
+import TitleText from "../components/TitleText";
 
 const GameOverScreen = props => {
   return (
@@ -10,25 +19,36 @@ const GameOverScreen = props => {
       source={whiteBg}
       style={{
         width: "100%",
-        height: "100%"
+        height: "105%"
       }}
     >
+      <Header />
       <View style={styles.screen}>
-        <Card style={styles.card}>
-          <View>
-            <Text style={styles.text}>The game is over!</Text>
-            <Text style={styles.text}>
-              Number of roundes: {props.roundsNumber}
-            </Text>
-            <Text style={styles.text}>Number was: {props.userNumber}</Text>
-            <Button
-              title="New game"
-              onPress={props.onRestart}
-              color={Colors.primary}
-              style={styles.button}
+        <View>
+          <TitleText style={styles.text}>The game is over!</TitleText>
+          <View style={styles.imageContainer}>
+            <Image
+              fadeDuration={500}
+              source={require("../assets/success.png")} //local image
+              /* source={{
+                  uri:
+                    "https://cdn.mos.cms.futurecdn.net/ntFmJUZ8tw3ULD3tkBaAtf.jpg"
+                }} */
+              style={styles.image}
+              resizeMode="cover"
             />
           </View>
-        </Card>
+          <BodyText style={styles.text}>
+            Number of roundes: {props.roundsNumber}
+          </BodyText>
+          <Text style={styles.text}>Number was: {props.userNumber}</Text>
+          <Button
+            title="New game"
+            onPress={props.onRestart}
+            color={Colors.primary}
+            style={styles.button}
+          />
+        </View>
       </View>
     </ImageBackground>
   );
@@ -47,10 +67,26 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    marginVertical: 3
+    textAlign: "center",
+    marginVertical: 3,
+    alignItems: "center",
+    justifyContent: "center"
   },
   button: {
     width: "60%"
+  },
+  image: {
+    width: "100%",
+    height: "100%"
+  },
+  imageContainer: {
+    borderRadius: 150,
+    borderWidth: 3,
+    borderColor: "black",
+    width: 300,
+    height: 300,
+    overflow: "hidden",
+    marginVertical: 30
   }
 });
 

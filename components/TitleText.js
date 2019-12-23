@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
+import Colors from "../constans/colors";
 
 const BodyText = props => {
   return (
@@ -11,7 +12,7 @@ const BodyText = props => {
 
 const styles = StyleSheet.create({
   headerTitle: {
-    color: "#fff",
+    color: Colors.primary,
     fontSize: 20,
     fontFamily: "open-sans-bold"
   }
