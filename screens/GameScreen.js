@@ -7,12 +7,13 @@ import {
   Alert,
   ImageBackground
 } from "react-native";
-import {} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
 import whiteBg from "../assets/whiteBg.jpg";
 import Colors from "../constans/colors";
 import Defaultstyles from "../constans/default-styles";
+import MainButton from "../components/MainButton";
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min);
@@ -80,16 +81,18 @@ const GameScreen = props => {
         </View>
         <NumberContainer>{currentGuess}</NumberContainer>
         <Card style={styles.buttonContainer}>
-          <Button
-            title="Lower"
+          <MainButton
             onPress={nextGuessHandler.bind(this, "lower")}
             color={Colors.secondary}
-          />
-          <Button
-            title="Greater"
+          >
+            <Ionicons name={"md-remove"} size={24} color={"white"} />
+          </MainButton>
+          <MainButton
             onPress={nextGuessHandler.bind(this, "greater")}
             color={Colors.primary}
-          />
+          >
+            <Ionicons name={"md-add"} size={24} color={"white"} />
+          </MainButton>
         </Card>
       </View>
     </ImageBackground>
