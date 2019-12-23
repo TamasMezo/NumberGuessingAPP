@@ -12,6 +12,7 @@ import whiteBg from "../assets/whiteBg.jpg";
 import Header from "../components/Header";
 import BodyText from "../components/BodyText";
 import TitleText from "../components/TitleText";
+import MainButton from "../components/MainButton";
 
 const GameOverScreen = props => {
   return (
@@ -22,32 +23,28 @@ const GameOverScreen = props => {
         height: "105%"
       }}
     >
-      <Header />
       <View style={styles.screen}>
-        <View>
-          <TitleText style={styles.text}>The game is over!</TitleText>
-          <View style={styles.imageContainer}>
-            <Image
-              fadeDuration={500}
-              source={require("../assets/success.png")} //local image
-              /* source={{
+        <TitleText style={styles.text}>The game is over!</TitleText>
+        <View style={styles.imageContainer}>
+          <Image
+            fadeDuration={500}
+            source={require("../assets/success.png")} //local image
+            /* source={{
                   uri:
                     "https://cdn.mos.cms.futurecdn.net/ntFmJUZ8tw3ULD3tkBaAtf.jpg"
                 }} */
-              style={styles.image}
-              resizeMode="cover"
-            />
-          </View>
-          <BodyText style={styles.text}>
-            Number of roundes: {props.roundsNumber}
-          </BodyText>
-          <Text style={styles.text}>Number was: {props.userNumber}</Text>
-          <Button
-            title="New game"
-            onPress={props.onRestart}
-            color={Colors.primary}
-            style={styles.button}
+            style={styles.image}
+            resizeMode="cover"
           />
+        </View>
+        <View style={styles.resultContainer}>
+          <BodyText style={styles.text}>
+            Number of roundes:
+            <Text style={styles.highlight}> {props.roundsNumber} </Text>
+            Number was:
+            <Text style={styles.highlight}> {props.userNumber} </Text>
+          </BodyText>
+          <MainButton onPress={props.onRestart}>New game</MainButton>
         </View>
       </View>
     </ImageBackground>
@@ -58,35 +55,39 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "rgba(255,255,255,0.8)"
   },
-  card: {
-    width: "80%",
-    height: "25%"
-  },
   text: {
-    fontSize: 20,
+    fontSize: 22,
     textAlign: "center",
-    marginVertical: 3,
+    marginVertical: 23,
     alignItems: "center",
     justifyContent: "center"
   },
-  button: {
-    width: "60%"
+  highlight: {
+    color: "#0ec217",
+    fontFamily: "open-sans-bold"
   },
+
   image: {
     width: "100%",
     height: "100%"
   },
   imageContainer: {
-    borderRadius: 150,
+    borderRadius: 125,
     borderWidth: 3,
     borderColor: "black",
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 250,
     overflow: "hidden",
-    marginVertical: 30
+    marginVertical: 30,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  resultContainer: {
+    textAlign: "center",
+    marginVertical: 20,
+    marginHorizontal: 50
   }
 });
 

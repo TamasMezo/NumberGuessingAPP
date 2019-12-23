@@ -7,6 +7,7 @@ import {
   Alert,
   ImageBackground
 } from "react-native";
+import {} from "@expo/vector-icons";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
 import whiteBg from "../assets/whiteBg.jpg";
