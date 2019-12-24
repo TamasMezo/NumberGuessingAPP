@@ -52,8 +52,8 @@ const App = () => {
     console.log("signedIN");
   };
 
-  //let content = <WelcomeScreen onSignIn={signinHandler} />;
-  let content = <StartGameScreen onStartGame={startGameHandler} />;
+  let content = <WelcomeScreen onSignIn={signinHandler} />;
+  //let content = <StartGameScreen onStartGame={startGameHandler} />;
   let header = null;
 
   if (userEmail && userEmail.length > 5) {
