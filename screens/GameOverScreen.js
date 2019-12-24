@@ -3,51 +3,52 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   ImageBackground,
-  Image
+  Image,
+  Dimensions,
+  ScrollView
 } from "react-native";
-import Colors from "../constans/colors";
 import whiteBg from "../assets/whiteBg.jpg";
-import Header from "../components/Header";
 import BodyText from "../components/BodyText";
 import TitleText from "../components/TitleText";
 import MainButton from "../components/MainButton";
 
 const GameOverScreen = props => {
   return (
-    <ImageBackground
-      source={whiteBg}
-      style={{
-        width: "100%",
-        height: "105%"
-      }}
-    >
-      <View style={styles.screen}>
-        <TitleText style={styles.text}>The game is over!</TitleText>
-        <View style={styles.imageContainer}>
-          <Image
-            fadeDuration={500}
-            source={require("../assets/success.png")} //local image
-            /* source={{
+    <ScrollView>
+      <ImageBackground
+        source={whiteBg}
+        style={{
+          width: "100%",
+          height: "105%"
+        }}
+      >
+        <View style={styles.screen}>
+          <TitleText style={styles.text}>The game is over!</TitleText>
+          <View style={styles.imageContainer}>
+            <Image
+              fadeDuration={500}
+              source={require("../assets/success.png")} //local image
+              /* source={{
                   uri:
                     "https://cdn.mos.cms.futurecdn.net/ntFmJUZ8tw3ULD3tkBaAtf.jpg"
                 }} */
-            style={styles.image}
-            resizeMode="cover"
-          />
+              style={styles.image}
+              resizeMode="cover"
+            />
+          </View>
+          <View style={styles.resultContainer}>
+            <BodyText style={styles.text}>
+              Number of roundes:
+              <Text style={styles.highlight}> {props.roundsNumber} </Text>
+              Number was:
+              <Text style={styles.highlight}> {props.userNumber} </Text>
+            </BodyText>
+            <MainButton onPress={props.onRestart}>New game</MainButton>
+          </View>
         </View>
-        <View style={styles.resultContainer}>
-          <BodyText style={styles.text}>
-            Number of roundes:
-            <Text style={styles.highlight}> {props.roundsNumber} </Text>
-            Number was:
-            <Text style={styles.highlight}> {props.userNumber} </Text>
-          </BodyText>
-          <MainButton onPress={props.onRestart}>New game</MainButton>
-        </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </ScrollView>
   );
 };
 
@@ -58,9 +59,9 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.8)"
   },
   text: {
-    fontSize: 22,
+    fontSize: Dimensions.get("window").width > 350 ? 22 : 18,
     textAlign: "center",
-    marginVertical: 23,
+    marginVertical: Dimensions.get("window").width / 25,
     alignItems: "center",
     justifyContent: "center"
   },
@@ -74,20 +75,20 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   imageContainer: {
-    borderRadius: 125,
+    borderRadius: (Dimensions.get("window").width * 0.7) / 2,
     borderWidth: 3,
     borderColor: "black",
-    width: 250,
-    height: 250,
+    width: Dimensions.get("window").width * 0.6,
+    height: Dimensions.get("window").width * 0.6,
     overflow: "hidden",
-    marginVertical: 30,
+    marginVertical: Dimensions.get("window").height / 40,
     alignItems: "center",
     justifyContent: "center"
   },
   resultContainer: {
     textAlign: "center",
-    marginVertical: 20,
-    marginHorizontal: 50
+    marginVertical: Dimensions.get("window").width > 350 ? 20 : 10,
+    marginHorizontal: Dimensions.get("window").width > 350 ? 50 : 10
   }
 });
 
