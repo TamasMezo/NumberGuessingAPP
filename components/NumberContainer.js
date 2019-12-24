@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 
 import Colors from "../constans/colors";
 
@@ -17,15 +17,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.secondary,
     borderWidth: 2,
     borderRadius: 10,
-    marginVertical: 10,
+    marginVertical: Dimensions.get("window").height < 500 ? 5 : 10,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
-    height: 100
+    width: Dimensions.get("window").height < 500 ? 50 : 100,
+    height: Dimensions.get("window").height < 500 ? 50 : 100
   },
   number: {
     color: Colors.primary,
-    fontSize: 40
+    fontSize: Dimensions.get("window").height < 500 ? 20 : 40
   }
 });
 

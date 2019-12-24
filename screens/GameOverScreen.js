@@ -19,8 +19,8 @@ const GameOverScreen = props => {
       <ImageBackground
         source={whiteBg}
         style={{
-          width: "100%",
-          height: "105%"
+          width: Dimensions.get("window").width,
+          height: Dimensions.get("window").height
         }}
       >
         <View style={styles.screen}>
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     fontSize: Dimensions.get("window").width > 350 ? 22 : 18,
     textAlign: "center",
     marginVertical: Dimensions.get("window").width / 25,
+    marginTop: Dimensions.get("window").height * 0.1,
     alignItems: "center",
     justifyContent: "center"
   },
