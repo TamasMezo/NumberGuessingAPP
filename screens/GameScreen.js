@@ -11,6 +11,7 @@ import {
   Dimensions
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { ScreenOrientation } from "expo";
 import NumberContainer from "../components/NumberContainer";
 import Card from "../components/Card";
 import whiteBg from "../assets/whiteBg.jpg";
@@ -44,6 +45,8 @@ const renderListItem = (listLength, itemData) => (
 );
 
 const GameScreen = props => {
+  //ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT); lock screen to portrait
+  //ScreenOrientation.addOrientationChangeListener()
   const initialGuess = generateRandomBetween(1, 100, props.userChoise);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const currentLow = useRef(1);
@@ -159,8 +162,8 @@ const GameScreen = props => {
     <ImageBackground
       source={whiteBg}
       style={{
-        width: "100%",
-        height: "100%"
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").height * 0.9
       }}
     >
       <View style={styles.screen}>
