@@ -49,6 +49,24 @@ const GameScreen = props => {
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
   const [pastGuesses, setPastGuesses] = useState([initialGuess.toString()]);
+  const [avalaibaleDeviceWidth, setAvalaibaleDeviceWidth] = useState(
+    Dimensions.get("window").width
+  );
+  const [avalaibaleDeviceHeight, setavalaibaleDeviceHeight] = useState(
+    Dimensions.get("window").height
+  );
+
+  useEffect(() => {
+    const updateLayout = () => {
+      setavalaibaleDeviceHeight(Dimensions.get("window").height);
+      setAvalaibaleDeviceWidth(Dimensions.get("window").width);
+    };
+    Dimensions.addEventListener("change", updateLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  });
 
   const { userChoise, onGameOver } = props;
 
@@ -87,9 +105,55 @@ const GameScreen = props => {
     ]);
   };
 
-  /* if(Dimensions.get('window').height < 600) {
-    return <View>....</View>
-  } */
+  let listContainerStyle = styles.listContainer;
+
+  if (avalaibaleDeviceWidth < 350) {
+    listContainerStyle = styles.listContainer;
+  }
+
+  if (avalaibaleDeviceHeight < 500) {
+    return (
+      <ImageBackground
+        source={whiteBg}
+        style={{
+          width: "100%",
+          height: "100%"
+        }}
+      >
+        <View style={styles.screen}>
+          <View style={styles.titleContainer}>
+            <Text style={Defaultstyles.bodyText}>Opponent's Guess</Text>
+          </View>
+          <View style={styles.controls}>
+            <MainButton
+              onPress={nextGuessHandler.bind(this, "lower")}
+              color={Colors.secondary}
+            >
+              <Ionicons name={"md-remove"} size={24} color={"white"} />
+            </MainButton>
+            <NumberContainer>{currentGuess}</NumberContainer>
+            <MainButton
+              onPress={nextGuessHandler.bind(this, "greater")}
+              color={Colors.primary}
+            >
+              <Ionicons name={"md-add"} size={24} color={"white"} />
+            </MainButton>
+          </View>
+
+          <View style={styles.listContainer}>
+            <FlatList
+              keyExtractor={item => {
+                item;
+              }}
+              data={pastGuesses}
+              renderItem={renderListItem.bind(this, pastGuesses.length)}
+              contentContainerStyle={styles.list}
+            />
+          </View>
+        </View>
+      </ImageBackground>
+    );
+  }
 
   return (
     <ImageBackground
@@ -163,6 +227,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     //alignItems: "center",
     justifyContent: "flex-end"
+  },
+  controls: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "80%"
   },
   listItem: {
     borderColor: "grey",
