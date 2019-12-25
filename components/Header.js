@@ -15,7 +15,12 @@ import TitleText from "../components/TitleText";
 
 const Header = props => {
   return (
-    <View style={styles.header}>
+    <View
+      style={{
+        ...styles.header,
+        ...Platform.select({ ios: styles.headerIOS, android: styles.android })
+      }}
+    >
       <View style={styles.titleContainer}>
         <TitleText style={styles.title}>{props.title}</TitleText>
       </View>
@@ -33,12 +38,17 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height * 0.1,
     paddingTop: 30,
-    backgroundColor: Platform.OS === "android" ? Colors.primary : "white",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "row",
-    borderBottomColor: Platform.OS === "ios" ? "#ccc" : "transparent",
-    borderBottomWidth: Platform.OS === "ios" ? 1 : 0
+    flexDirection: "row"
+  },
+  headerIOS: {
+    backgroundColor: "white",
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1
+  },
+  headerAndroid: {
+    backgroundColor: Colors.primary
   },
   titleContainer: {
     width: "70%",
