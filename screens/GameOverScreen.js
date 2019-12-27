@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,18 +14,53 @@ import TitleText from "../components/TitleText";
 import MainButton from "../components/MainButton";
 
 const GameOverScreen = props => {
+  const [componentWidth, setComponentWidth] = useState(
+    Dimensions.get("window").width
+  );
+  const [componentHeigth, setComponentHeigth] = useState(
+    Dimensions.get("window").height
+  );
+
+  useEffect(() => {
+    const changeLayout = () => {
+      setComponentWidth(Dimensions.get("window").width);
+      setComponentHeigth(Dimensions.get("window").height);
+    };
+
+    Dimensions.addEventListener("change", changeLayout);
+    return () => {
+      Dimensions.removeEventListener("change", changeLayout);
+    };
+  });
+
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{ width: componentWidth, height: componentHeigth }}
+    >
       <ImageBackground
         source={whiteBg}
         style={{
-          width: Dimensions.get("window").width,
-          height: Dimensions.get("window").height
+          width: componentWidth,
+          height: componentHeigth
         }}
       >
-        <View style={styles.screen}>
+        <View
+          style={{
+            ...styles.screen,
+            ...{ width: componentWidth, height: componentHeigth }
+          }}
+        >
           <TitleText style={styles.text}>The game is over!</TitleText>
-          <View style={styles.imageContainer}>
+          <View
+            style={{
+              ...styles.imageContainer,
+              ...{
+                width: componentWidth * 0.6,
+                height: componentWidth * 0.6,
+                borderRadius: (componentWidth * 0.6) / 2
+              }
+            }}
+          >
             <Image
               fadeDuration={500}
               source={require("../assets/success.png")} //local image
@@ -76,11 +111,8 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   imageContainer: {
-    borderRadius: (Dimensions.get("window").width * 0.7) / 2,
     borderWidth: 3,
     borderColor: "black",
-    width: Dimensions.get("window").width * 0.6,
-    height: Dimensions.get("window").width * 0.6,
     overflow: "hidden",
     marginVertical: Dimensions.get("window").height / 40,
     alignItems: "center",

@@ -1,36 +1,51 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-  Platform
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Dimensions, Platform } from "react-native";
 
-import bar from "../assets/bar.png";
 import Colors from "../constans/colors";
 import TitleText from "../components/TitleText";
 
 const Header = props => {
+  const [componentWidth, setComponentWidth] = useState(
+    Dimensions.get("window").width
+  );
+  const [componentHeigth, setComponentHeigth] = useState(
+    Dimensions.get("window").height * 0.11
+  );
+
+  useEffect(() => {
+    const changeLayout = () => {
+      setComponentWidth(Dimensions.get("window").width);
+      if (Dimensions.get("window").height > 450) {
+        setComponentHeigth(Dimensions.get("window").height * 0.11);
+      } else {
+        setComponentHeigth(Dimensions.get("window").height * 0.2);
+      }
+    };
+
+    Dimensions.addEventListener("change", changeLayout);
+    return () => {
+      Dimensions.removeEventListener("change", changeLayout);
+    };
+  });
   return (
     <View
       style={{
         ...styles.header,
+        ...{ width: componentWidth, height: componentHeigth },
         ...Platform.select({
           ios: styles.headerIOS,
           android: styles.headerAndroid
         })
       }}
     >
-      <View style={styles.titleContainer}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          justifyContent: "center"
+        }}
+      >
         <TitleText style={styles.title}>{props.title}</TitleText>
-      </View>
-      <View style={styles.barContainer}>
-        <TouchableOpacity>
-          <Image style={styles.bar} source={bar} />
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -38,8 +53,6 @@ const Header = props => {
 
 const styles = StyleSheet.create({
   header: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.12,
     paddingTop: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -53,23 +66,8 @@ const styles = StyleSheet.create({
   headerAndroid: {
     backgroundColor: Colors.primary
   },
-  titleContainer: {
-    width: "70%",
-    alignItems: "flex-end",
-    justifyContent: "flex-end"
-  },
   title: {
     color: Platform.OS === "ios" ? Colors.secondary : "white"
-  },
-  barContainer: {
-    flex: 1,
-    marginRight: 20,
-    alignItems: "flex-end",
-    justifyContent: "flex-end"
-  },
-  bar: {
-    width: 20,
-    height: 20
   }
 });
 

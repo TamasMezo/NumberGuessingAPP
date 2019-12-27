@@ -27,11 +27,19 @@ const StartGameScreen = props => {
   const [buttonWidth, setButtonWidth] = useState(
     Dimensions.get("window").width / 4
   );
+  const [componentWidth, setComponentWidth] = useState(
+    Dimensions.get("window").width
+  );
+  const [componentHeigth, setComponentHeigth] = useState(
+    Dimensions.get("window").height
+  );
 
   //94
   useEffect(() => {
     const changeLayout = () => {
       setButtonWidth(Dimensions.get("window").width / 4);
+      setComponentWidth(Dimensions.get("window").width);
+      setComponentHeigth(Dimensions.get("window").height);
     };
 
     Dimensions.addEventListener("change", changeLayout);
@@ -88,7 +96,7 @@ const StartGameScreen = props => {
           source={whiteBg}
           style={{
             width:
-              Dimensions.get("window").width > 500
+              Dimensions.get("window").width > 450
                 ? Dimensions.get("window").width * 2
                 : Dimensions.get("window").width,
             height: Dimensions.get("window").height * 1.06
@@ -99,7 +107,12 @@ const StartGameScreen = props => {
               Keyboard.dismiss();
             }}
           >
-            <View style={styles.screen}>
+            <View
+              style={{
+                ...styles.screen,
+                ...{ width: componentWidth, height: componentHeigth }
+              }}
+            >
               <Text style={styles.title}>Place your bet! </Text>
               <Card style={styles.inputContainer}>
                 <Text>Select a Number</Text>

@@ -78,10 +78,10 @@ const App = () => {
   }
 
   return (
-    <SafeAreaView style={styles.screen}>
+    <View style={styles.screen}>
       {header}
       {content}
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -208,7 +208,7 @@ const GameScreen = props => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 10,
+    padding: Dimensions.get("window").height > 600 ? 10 : 2,
     alignItems: "center",
     backgroundColor: "rgba(255,255,255,0.8)"
   },
