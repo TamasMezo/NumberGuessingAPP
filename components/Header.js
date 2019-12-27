@@ -18,7 +18,10 @@ const Header = props => {
     <View
       style={{
         ...styles.header,
-        ...Platform.select({ ios: styles.headerIOS, android: styles.android })
+        ...Platform.select({
+          ios: styles.headerIOS,
+          android: styles.headerAndroid
+        })
       }}
     >
       <View style={styles.titleContainer}>
@@ -36,7 +39,7 @@ const Header = props => {
 const styles = StyleSheet.create({
   header: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.1,
+    height: Dimensions.get("window").height * 0.12,
     paddingTop: 30,
     alignItems: "center",
     justifyContent: "center",
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   title: {
-    color: Platform.OS === "ios" ? Colors.secondary : Colors.primary
+    color: Platform.OS === "ios" ? Colors.secondary : "white"
   },
   barContainer: {
     flex: 1,
