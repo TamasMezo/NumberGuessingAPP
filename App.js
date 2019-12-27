@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 
 import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
@@ -78,10 +78,10 @@ const App = () => {
   }
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       {header}
       {content}
-    </View>
+    </SafeAreaView>
   );
 };
 
